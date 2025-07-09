@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Minhas Contas a Pagar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    li {
+      background-color: #1e1e1e;
+      margin-bottom: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .info {
+      flex-grow: 1;
+    }
+    .status {
+      font-weight: bold;
+    }
+    .pago {
+      color: #4caf50;
+    }
+    .nao-pago {
+      color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <h1>Minhas Contas a Pagar</h1>
+  <a href="#">➕ Adicionar Nova Conta</a>
+
+  <ul>
+    {% for conta in contas %}
+      <li>
+        <div class="info">
+          <strong>{{ conta.titulo }}</strong><br>
+          💰 {{ conta.valor }}<br>
+          📅 Vence em {{ conta.vencimento }}
+        </div>
+        <div class="status {% if conta.pago %}pago{% else %}nao-pago{% endif %}">
+          {% if conta.pago %}✅ Pago{% else %}❌ Não pago{% endif %}
+        </div>
+      </li>
+    {% empty %}
+      <li style="text-align: center;">Nenhuma conta cadastrada.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
